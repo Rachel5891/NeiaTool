@@ -7,15 +7,15 @@
 <body>
 
 <h1>Welcome to the NEIA Tool Random Selection</h1>
-<p>Click the links below to access your 5 randomly chosen forms:</p>
+<p>Click the links below to access your randomly chosen forms:</p>
 <div id="links"></div>
 
 <script>
-// 1) Put your 30 Cognito form links in an array
+// 1) Put your Cognito form links in an array (fixing the curly quotes)
 var formLinks = [
-  "https://www.cognitoforms.com/mghihp1/cvineia",
+  "https://www.cognitoforms.com/MGHIHP1/CVINEIA",
   "https://www.cognitoforms.com/MGHIHP1/InfectiousDiseaseSurvey",
-  “https://www.cognitoforms.com/MGHIHP1/MonkeypoxPreparationOnCollegeCampuses”,
+  "https://www.cognitoforms.com/MGHIHP1/MonkeypoxPreparationOnCollegeCampuses"
 ];
 
 // 2) Shuffle the array of formLinks (Fisher–Yates shuffle)
@@ -34,16 +34,16 @@ function shuffle(array) {
 // 3) Shuffle the list
 shuffle(formLinks);
 
-// 4) Slice out the first 5 links
-var selectedLinks = formLinks.slice(0, 2);
+// 4) Slice out the first X links (use min to prevent out-of-bounds errors)
+var selectedLinks = formLinks.slice(0, Math.min(2, formLinks.length));
 
 // 5) Display them on the page
 var linksDiv = document.getElementById("links");
 selectedLinks.forEach(function(link, index) {
   var a = document.createElement("a");
   a.href = link;
-  a.target = "_blank";      // open in a new tab
-  a.innerText = "Form " + (index+1);
+  a.target = "_blank";  // Open in a new tab
+  a.innerText = "Form " + (index + 1);
   linksDiv.appendChild(a);
   linksDiv.appendChild(document.createElement("br"));
 });
@@ -51,3 +51,4 @@ selectedLinks.forEach(function(link, index) {
 
 </body>
 </html>
+
