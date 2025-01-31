@@ -7,37 +7,46 @@
 <body>
 
 <h1>Welcome to the NEIA Tool Random Selection</h1>
-<p>Click the links below to access your randomly chosen forms:</p>
+<p>Click the links below to access your assigned forms:</p>
 <div id="links"></div>
 
 <script>
-// 1) Put your Cognito form links in an array (fixing the curly quotes)
+// 1) List of Cognito form links
 var formLinks = [
   "https://www.cognitoforms.com/MGHIHP1/CVINEIA",
   "https://www.cognitoforms.com/MGHIHP1/InfectiousDiseaseSurvey",
   "https://www.cognitoforms.com/MGHIHP1/MonkeypoxPreparationOnCollegeCampuses"
 ];
 
-// 2) Shuffle the array of formLinks (Fisher–Yates shuffle)
+// 2) How many links to assign per user
+var numLinks = 2;
+
+// 3) Function to shuffle the links (Fisher-Yates Shuffle)
 function shuffle(array) {
   let currentIndex = array.length, randomIndex;
-
   while (currentIndex !== 0) {
     randomIndex = Math.floor(Math.random() * currentIndex);
     currentIndex--;
-    // Swap
     [array[currentIndex], array[randomIndex]] = [array[randomIndex], array[currentIndex]];
   }
   return array;
 }
 
-// 3) Shuffle the list
-shuffle(formLinks);
+// 4) Check if user already has assigned links in localStorage
+var storedLinks = localStorage.getItem("savedLinks");
 
-// 4) Slice out the first X links (use min to prevent out-of-bounds errors)
-var selectedLinks = formLinks.slice(0, Math.min(2, formLinks.length));
+var selectedLinks;
+if (storedLinks) {
+  // 5) If saved links exist, use them
+  selectedLinks = JSON.parse(storedLinks);
+} else {
+  // 6) If no saved links, randomly pick new ones
+  shuffle(formLinks);
+  selectedLinks = formLinks.slice(0, numLinks);
+  localStorage.setItem("savedLinks", JSON.stringify(selectedLinks));
+}
 
-// 5) Display them on the page
+// 7) Display the links on the page
 var linksDiv = document.getElementById("links");
 selectedLinks.forEach(function(link, index) {
   var a = document.createElement("a");
@@ -51,4 +60,5 @@ selectedLinks.forEach(function(link, index) {
 
 </body>
 </html>
+
 
