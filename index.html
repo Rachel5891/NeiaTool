@@ -22,6 +22,12 @@
   </style>
 </head>
 <body>
+  // Check if 'dev=1' is present in the URL
+const urlParams = new URLSearchParams(window.location.search);
+if (urlParams.get('dev') === '1') {
+  localStorage.clear();
+  console.log('Developer mode activated. Local storage cleared.');
+}
 
 <!-- 🔹 Informed Consent Section -->
 <div id="consentSection">
