@@ -64,6 +64,8 @@
 </div>
 
 <script>
+console.log("Script started.");
+
 // 1️⃣ Full list of available Cognito Forms
 var formLinks = [
   "https://www.cognitoforms.com/MGHIHP1/NEIAToolQuestion1",
@@ -89,22 +91,30 @@ function shuffle(array) {
 
 // 4️⃣ Check if the user has previously consented
 var hasConsented = localStorage.getItem("hasConsented");
+console.log("hasConsented:", hasConsented);
 
 // 5️⃣ Check if the user already has assigned questions
 var storedLinks = localStorage.getItem("savedLinks");
+console.log("storedLinks:", storedLinks);
+
 var completedForms = JSON.parse(localStorage.getItem("completedForms")) || [];
+console.log("completedForms:", completedForms);
 
 var selectedLinks;
 if (storedLinks) {
   selectedLinks = JSON.parse(storedLinks);
+  console.log("Using storedLinks:", selectedLinks);
 } else {
+  console.log("No storedLinks found. Shuffling the formLinks.");
   shuffle(formLinks);
   selectedLinks = formLinks.slice(0, numLinks);
   localStorage.setItem("savedLinks", JSON.stringify(selectedLinks));
+  console.log("Newly selected links:", selectedLinks);
 }
 
 // 6️⃣ Filter out already completed forms
 selectedLinks = selectedLinks.filter(link => !completedForms.includes(link));
+console.log("Links after filtering completed forms:", selectedLinks);
 
 // 7️⃣ Display the correct section based on consent status
 if (hasConsented) {
@@ -114,13 +124,16 @@ if (hasConsented) {
 
 // 8️⃣ If all assigned forms are completed, show a thank you message
 if (selectedLinks.length === 0) {
+  console.log("All assigned forms have been completed.");
   document.body.innerHTML = "<h1>Thank you! You have completed all assigned forms.</h1>";
 } else {
   // 9️⃣ Get the next form link
   var nextForm = selectedLinks[0];
+  console.log("Next form link:", nextForm);
 
   // 🔟 Update completed forms when they return from submission
   function markCompleted() {
+    console.log("Marking form as completed:", nextForm);
     completedForms.push(nextForm);
     localStorage.setItem("completedForms", JSON.stringify(completedForms));
   }
@@ -137,6 +150,7 @@ if (selectedLinks.length === 0) {
 
 // 1️⃣2️⃣ Function to start the survey after consent is given
 function startSurvey() {
+  console.log("Consent given. Starting survey.");
   localStorage.setItem("hasConsented", "true");
   document.getElementById("consentSection").style.display = "none";
   document.getElementById("surveySection").classList.remove("hidden");
@@ -144,8 +158,11 @@ function startSurvey() {
 
 // Function to enable developer mode by clearing local storage
 function enableDevMode() {
+  console.log("Dev mode button clicked.");
   if (confirm("Are you sure you want to clear all local data and start fresh?")) {
+    console.log("Clearing localStorage...");
     localStorage.clear();
+    console.log("Reloading page...");
     location.reload();
   }
 }
