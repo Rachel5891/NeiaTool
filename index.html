@@ -9,7 +9,7 @@
     .hidden { display: none; } 
     .button { background: #007bff; color: white; padding: 10px 15px; border: none; cursor: pointer; margin-top: 10px; }
     .button:hover { background: #0056b3; }
-    /* Just to nicely align the "Dev Mode" button on the right */
+    /* Developer Mode button alignment */
     .dev-mode {
       display: flex;
       justify-content: flex-end;
@@ -122,10 +122,11 @@ if (hasConsented) {
   document.getElementById("surveySection").classList.remove("hidden");
 }
 
-// 8️⃣ If all assigned forms are completed, show a thank you message
+// 8️⃣ If all assigned forms are completed, update only the survey section
 if (selectedLinks.length === 0) {
   console.log("All assigned forms have been completed.");
-  document.body.innerHTML = "<h1>Thank you! You have completed all assigned forms.</h1>";
+  var surveySection = document.getElementById("surveySection");
+  surveySection.innerHTML = "<h1>Thank you! You have completed all assigned forms.</h1>";
 } else {
   // 9️⃣ Get the next form link
   var nextForm = selectedLinks[0];
