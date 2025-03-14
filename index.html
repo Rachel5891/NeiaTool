@@ -9,6 +9,16 @@
     .hidden { display: none; } 
     .button { background: #007bff; color: white; padding: 10px 15px; border: none; cursor: pointer; margin-top: 10px; }
     .button:hover { background: #0056b3; }
+    /* Just to nicely align the "Dev Mode" button on the right */
+    .dev-mode {
+      display: flex;
+      justify-content: flex-end;
+    }
+    .dev-button {
+      background: #aaa; 
+      margin-top: 0;
+      margin-right: 20px;
+    }
   </style>
 </head>
 <body>
@@ -49,6 +59,11 @@
   <div id="links"></div>
 </div>
 
+<!-- 🔹 Developer Mode Button -->
+<div class="dev-mode">
+  <button class="button dev-button" onclick="enableDevMode()">Developer Mode: Reset</button>
+</div>
+
 <script>
 // 1️⃣ Full list of available Cognito Forms
 var formLinks = [
@@ -80,6 +95,7 @@ var hasConsented = localStorage.getItem("hasConsented");
 var storedLinks = localStorage.getItem("savedLinks");
 var completedForms = JSON.parse(localStorage.getItem("completedForms")) || [];
 
+var selectedLinks;
 if (storedLinks) {
   selectedLinks = JSON.parse(storedLinks);
 } else {
@@ -125,6 +141,14 @@ function startSurvey() {
   localStorage.setItem("hasConsented", "true");
   document.getElementById("consentSection").style.display = "none";
   document.getElementById("surveySection").classList.remove("hidden");
+}
+
+// Function to enable developer mode by clearing local storage
+function enableDevMode() {
+  if (confirm("Are you sure you want to clear all local data and start fresh?")) {
+    localStorage.clear();
+    location.reload();
+  }
 }
 </script>
 
