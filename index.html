@@ -149,12 +149,10 @@ if (selectedLinks.length === 0) {
   linksDiv.appendChild(a);
 }
 
-// 1️⃣2️⃣ Function to start the survey after consent is given
 function startSurvey() {
-  console.log("Consent given. Starting survey.");
+  console.log("Consent given. Redirecting to intro form.");
   localStorage.setItem("hasConsented", "true");
-  document.getElementById("consentSection").style.display = "none";
-  document.getElementById("surveySection").classList.remove("hidden");
+  window.location.href = "https://www.cognitoforms.com/MGHIHP1/NEIAToolIntro";
 }
 
 // Function to enable developer mode by clearing local storage
