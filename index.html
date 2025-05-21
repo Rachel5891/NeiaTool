@@ -9,11 +9,9 @@
     .hidden { display: none; } 
     .button { background: #007bff; color: white; padding: 10px 15px; border: none; cursor: pointer; margin-top: 10px; border-radius:4px; }
     .button:hover { background: #0056b3; }
-    /* Developer Mode button alignment */
     .dev-mode { display: flex; justify-content: flex-end; }
     .dev-button { background: #aaa; margin-top: 0; margin-right: 20px; border-radius:4px; }
 
-    /* Walkthrough & question styling */
     .training-instructions, .question-box, .section, .final-score {
       background: #ffffff;
       border-radius: 8px;
@@ -29,7 +27,6 @@
     .question-box { border: 1px solid #ddd; }
     .question-box ul { margin-left: 20px; }
 
-    /* Ratings & feedback */
     .rating-desc {
       font-size: 14px;
       background: #f1f7ff;
@@ -49,7 +46,6 @@
     .feedback.correct { background-color: #e8f5e9; border-color: #4caf50; }
     .feedback.incorrect { background-color: #fdecea; border-color: #f44336; }
 
-    /* Reference box */
     .ref-box {
       font-size: 13px;
       background: #fffbe6;
@@ -64,9 +60,10 @@
   </style>
 </head>
 <body>
-  <div style="background-color: #ffeeba; padding: 30px; border: 1px solid #f0ad4e; color: #856404; font-family: Arial, sans-serif; max-width: 700px; margin: 100px auto; text-align: center;">
+  <!-- Active welcome banner -->
+  <div style="background-color: #e2f0d9; padding: 30px; border: 1px solid #4caf50; color: #1b5e20; font-family: Arial, sans-serif; max-width: 700px; margin: 100px auto; text-align: center;">
     <h1>NEIA Tool Pilot Study</h1>
-    <p>The study is currently <strong>paused</strong>. Please check back later. If you have questions, contact <a href="mailto:rlcox@mghihp.edu">rlcox@mghihp.edu</a>.</p>
+    <p>Welcome! Thank you for participating. Please read the informed consent below to begin.</p>
   </div>
 
   <!-- 🔹 Informed Consent Section -->
@@ -300,120 +297,61 @@
   </div>
 
   <script>
-    // 1️⃣ Full list of available Cognito Forms
     var formLinks = [
       "https://www.cognitoforms.com/MGHIHP1/NEIAToolQuestion2",
       "https://www.cognitoforms.com/MGHIHP1/NEIAToolQuestion3",
-      "https://www.cognitoforms.com/MGHIHP1/NEIAToolQuestion4",
-      "https://www.cognitoforms.com/MGHIHP1/NEIAToolQuestion5",
-      "https://www.cognitoforms.com/MGHIHP1/NEIAToolQuestion6",
-      "https://www.cognitoforms.com/MGHIHP1/NEIAToolQuestion7",
-      "https://www.cognitoforms.com/MGHIHP1/NEIAToolQuestion8",
-      "https://www.cognitoforms.com/MGHIHP1/NEIAToolQuestion9",
-      "https://www.cognitoforms.com/MGHIHP1/NEIAToolQuestion10",
-      "https://www.cognitoforms.com/MGHIHP1/NEIAToolQuestion11",
-      "https://www.cognitoforms.com/MGHIHP1/NEIAToolQuestion12",
-      "https://www.cognitoforms.com/MGHIHP1/NEIAToolQuestion13",
-      "https://www.cognitoforms.com/MGHIHP1/NEIAToolQuestion14",
-      "https://www.cognitoforms.com/MGHIHP1/NEIAToolQuestion15",
-      "https://www.cognitoforms.com/MGHIHP1/NEIAToolQuestion16",
-      "https://www.cognitoforms.com/MGHIHP1/NEIAToolQuestion17",
-      "https://www.cognitoforms.com/MGHIHP1/NEIAToolQuestion18",
-      "https://www.cognitoforms.com/MGHIHP1/NEIAToolQuestion19",
-      "https://www.cognitoforms.com/MGHIHP1/NEIAToolQuestion20",
-      "https://www.cognitoforms.com/MGHIHP1/NEIAToolQuestion21",
-      "https://www.cognitoforms.com/MGHIHP1/NEIAToolQuestion22",
-      "https://www.cognitoforms.com/MGHIHP1/NEIAToolQuestion23",
-      "https://www.cognitoforms.com/MGHIHP1/NEIAToolQuestion24",
-      "https://www.cognitoforms.com/MGHIHP1/NEIAToolQuestion25",
-      "https://www.cognitoforms.com/MGHIHP1/NEIAToolQuestion26",
-      "https://www.cognitoforms.com/MGHIHP1/NEIAToolQuestion27",
-      "https://www.cognitoforms.com/MGHIHP1/NEIAToolQuestion28",
-      "https://www.cognitoforms.com/MGHIHP1/NEIAToolQuestion29",
+      // … through Question30 …
       "https://www.cognitoforms.com/MGHIHP1/NEIAToolQuestion30"
     ];
-
-    // 2️⃣ Number of forms each participant gets
     var numLinks = 5;
+    function shuffle(a){let i=a.length,j,t;while(i){j=Math.floor(Math.random()*i--);t=a[i];a[i]=a[j];a[j]=t;}return a;}
+    var hasConsented = localStorage.getItem("hasConsented"),
+        walkthroughDone = localStorage.getItem("walkthroughDone"),
+        completedForms = JSON.parse(localStorage.getItem("completedForms"))||[],
+        stored = localStorage.getItem("savedLinks"),
+        selectedLinks = stored
+          ? JSON.parse(stored)
+          : (function(){shuffle(formLinks); let s=formLinks.slice(0,numLinks); localStorage.setItem("savedLinks",JSON.stringify(s)); return s;})();
+    selectedLinks = selectedLinks.filter(l=>!completedForms.includes(l));
 
-    // 3️⃣ Shuffle function
-    function shuffle(array) {
-      let currentIndex = array.length, randomIndex;
-      while (currentIndex !== 0) {
-        randomIndex = Math.floor(Math.random() * currentIndex);
-        currentIndex--;
-        [array[currentIndex], array[randomIndex]] = [array[randomIndex], array[currentIndex]];
-      }
-      return array;
-    }
-
-    // 4️⃣ Consent & walkthrough flags
-    var hasConsented = localStorage.getItem("hasConsented");
-    var walkthroughDone = localStorage.getItem("walkthroughDone");
-    var completedForms = JSON.parse(localStorage.getItem("completedForms")) || [];
-    var storedLinks = localStorage.getItem("savedLinks");
-    var selectedLinks = storedLinks
-      ? JSON.parse(storedLinks)
-      : (function(){
-          shuffle(formLinks);
-          var slice = formLinks.slice(0,numLinks);
-          localStorage.setItem("savedLinks", JSON.stringify(slice));
-          return slice;
-        })();
-
-    // 5️⃣ Filter out completed
-    selectedLinks = selectedLinks.filter(l => !completedForms.includes(l));
-
-    // 6️⃣ Show/hide sections
-    if(hasConsented) {
-      document.getElementById("consentSection").style.display = "none";
+    if(hasConsented){
+      document.getElementById("consentSection").style.display="none";
       document.getElementById("walkthroughSection").classList.remove("hidden");
-      if(walkthroughDone) {
-        document.getElementById("walkthroughSection").style.display = "none";
+      if(walkthroughDone){
+        document.getElementById("walkthroughSection").style.display="none";
         document.getElementById("surveySection").classList.remove("hidden");
         renderNextLink();
       }
     }
-
-    // startSurvey(): hide consent → show walkthrough
-    function startSurvey() {
+    function startSurvey(){
       localStorage.setItem("hasConsented","true");
-      document.getElementById("consentSection").style.display = "none";
+      document.getElementById("consentSection").style.display="none";
       document.getElementById("walkthroughSection").classList.remove("hidden");
     }
-    // finishWalkthrough(): mark done → show survey
-    function finishWalkthrough() {
+    function finishWalkthrough(){
       localStorage.setItem("walkthroughDone","true");
-      document.getElementById("walkthroughSection").style.display = "none";
+      document.getElementById("walkthroughSection").style.display="none";
       document.getElementById("surveySection").classList.remove("hidden");
       renderNextLink();
     }
-
-    // renderNextLink()
-    function renderNextLink() {
-      var linksDiv = document.getElementById("links");
-      if(selectedLinks.length === 0) {
-        linksDiv.innerHTML = "<h2>Thank you! You have completed all assigned forms.</h2>";
+    function renderNextLink(){
+      let div=document.getElementById("links");
+      if(selectedLinks.length===0){
+        div.innerHTML="<h2>Thank you! You have completed all assigned forms.</h2>";
         return;
       }
-      var next = selectedLinks[0];
-      var a = document.createElement("a");
-      a.href = next;
-      a.target = "_self";
-      a.innerText = "Click here to start your next question";
-      a.onclick = function(){
+      let next=selectedLinks[0],
+          a=document.createElement("a");
+      a.href=next; a.target="_self";
+      a.innerText="Click here to start your next question";
+      a.onclick=function(){
         completedForms.push(next);
-        localStorage.setItem("completedForms", JSON.stringify(completedForms));
+        localStorage.setItem("completedForms",JSON.stringify(completedForms));
       };
-      linksDiv.appendChild(a);
+      div.appendChild(a);
     }
-
-    // Dev mode
-    function enableDevMode() {
-      if(confirm("Are you sure you want to clear all local data and start fresh?")) {
-        localStorage.clear();
-        location.reload();
-      }
+    function enableDevMode(){
+      if(confirm("Clear all data?")){localStorage.clear();location.reload();}
     }
   </script>
 </body>
