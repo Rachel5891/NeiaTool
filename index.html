@@ -223,31 +223,47 @@
         <strong>Terminology Feedback:</strong><br>
         The expert rated this terminology <strong>1 (Inaccurate)</strong>.<br>
         <em>Explanation:</em> The question uses “patient” and the abbreviation “TSH” which could confuse test-takers.  
-        <div class="ref-box">
-          <!--<table>
-            <tr><th>Correct Term</th><th>Definition</th></tr>
-            <tr><td>Client</td><td>Individual, family or group, which includes significant others and populations.</td></tr>
-            <tr><td>Order</td><td>Intervention, remedy or treatment as directed by an authorized primary health care provider.</td></tr>
-            <tr><td>Prescription</td><td>Intervention as it relates to medication specifically as directed by an authorized primary health care provider.</td></tr>
-            <tr><td>Primary Health Care Provider</td><td>Members of the health care team who are licensed and authorized to formulate prescriptions and orders on behalf of the client.</td></tr>
-            <tr><td>Unlicensed Assistive Personnel (UAP)</td><td>Any unlicensed personnel trained to function in a supportive role to whom a nursing responsibility may be delegated.</td></tr>
-          </table>
-          <p><strong>Incorrect Term → Correct Term → Reason</strong></p>
-          <table>
-            <tr><th>Incorrect</th><th>Correct</th><th>Reason for Avoidance</th></tr>
-            <tr><td>q.d.</td><td>Daily</td><td>Can be confused for "QID" or "every day"</td></tr>
-            <tr><td>U or u</td><td>Unit</td><td>Mistaken for zero or four, causing dosage errors</td></tr>
-            <tr><td>IU</td><td>International Unit</td><td>Mistaken for intravenous or the number 10</td></tr>
-            <tr><td>Q.O.D</td><td>Every other day</td><td>Mistaken for "QD" or "QID", which are very different dosing schedules</td></tr>
-            <tr><td>Trailing zero (X.0 mg)</td><td>X mg</td><td>Trailing zero can lead to overdose if decimal is missed</td></tr>
-            <tr><td>Lack of leading zero (.X mg)</td><td>0.X mg</td><td>Lack of leading zero can lead to overdose</td></tr>
-          </table>
-          <p><em>Disclaimer:</em> Abbreviations (like BP, HR, RR) may confuse test-takers.</p>
-        </div>
-      </div>
+        <div class="section">
+  <h3>4️⃣ Terminology</h3>
+  <div class="rating-desc">
+    <strong>Inaccurate:</strong> Uses incorrect or inconsistent terminology not aligned with the Test Plan.<br>
+    <strong>Accurate:</strong> Consistently uses accurate terminology aligned with the Test Plan.
+  </div>
+  <select onchange="showFeedback('terminology', this.value)">
+    <option value="">-- Choose a rating --</option>
+    <option value="1">1 - Inaccurate</option>
+    <option value="3">3 - Accurate</option>
+  </select>
+  <div id="feedback-terminology" class="feedback">
+    <strong>Terminology Feedback:</strong><br>
+    The expert rated this terminology <strong>1 (Inaccurate)</strong>.<br>
+    <em>Explanation:</em> The question uses “patient” and the abbreviation “TSH” which could confuse test-takers.  
+    <div class="ref-box">
+      <strong>Terminology Reference</strong><br>
+      <table>
+        <tr><th>Correct Term</th><th>Definition</th></tr>
+        <tr><td>Client</td><td>Individual, family or group, which includes significant others and populations.</td></tr>
+        <tr><td>Order</td><td>Intervention, remedy or treatment as directed by an authorized primary health care provider.</td></tr>
+        <tr><td>Prescription</td><td>Intervention as it relates to medication specifically as directed by an authorized primary health care provider.</td></tr>
+        <tr><td>Primary Health Care Provider</td><td>Members of the health care team who are licensed and authorized to formulate prescriptions and orders on behalf of the client.</td></tr>
+        <tr><td>Unlicensed Assistive Personnel (UAP)</td><td>Any unlicensed personnel trained to function in a supportive role to whom a nursing responsibility may be delegated.</td></tr>
+      </table>
+      <p><strong>Incorrect Term → Correct Term → Reason</strong></p>
+      <table>
+        <tr><th>Incorrect</th><th>Correct</th><th>Reason for Avoidance</th></tr>
+        <tr><td>q.d.</td><td>Daily</td><td>Can be confused for "QID" or "every day"</td></tr>
+        <tr><td>U or u</td><td>Unit</td><td>Mistaken for zero or four, causing dosage errors</td></tr>
+        <tr><td>IU</td><td>International Unit</td><td>Mistaken for intravenous or the number 10</td></tr>
+        <tr><td>Q.O.D</td><td>Every other day</td><td>Mistaken for "QD" or "QID", which are very different dosing schedules</td></tr>
+        <tr><td>Trailing zero (X.0 mg)</td><td>X mg</td><td>Trailing zero can lead to overdose if decimal is missed</td></tr>
+        <tr><td>Lack of leading zero (.X mg)</td><td>0.X mg</td><td>Lack of leading zero can lead to overdose</td></tr>
+      </table>
+      <p><em>Disclaimer:</em> Abbreviations (like BP, HR, RR) may confuse test-takers.</p>
     </div>
+  </div>
+</div>
 
-    <!-- 5️⃣ NCLEX Test Plan Alignment -->
+<!-- 5️⃣ NCLEX Test Plan Alignment -->
     <div class="section">
       <h3>5️⃣ NCLEX Test Plan Alignment</h3>
       <div class="rating-desc">
