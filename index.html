@@ -6,11 +6,11 @@
   <style>
     body { font-family: Arial, sans-serif; margin: 40px; padding: 20px; line-height: 1.5; }
     h1, h2 { color: #333; }
-    .hidden { display: none; } 
-    .button { background: #007bff; color: white; padding: 10px 15px; border: none; cursor: pointer; margin-top: 10px; border-radius:4px; }
+    .hidden { display: none; }
+    .button { background: #007bff; color: white; padding: 10px 15px; border: none; cursor: pointer; margin-top: 10px; border-radius: 4px; }
     .button:hover { background: #0056b3; }
     .dev-mode { display: flex; justify-content: flex-end; }
-    .dev-button { background: #aaa; margin-top: 0; margin-right: 20px; border-radius:4px; }
+    .dev-button { background: #aaa; margin-top: 0; margin-right: 20px; border-radius: 4px; }
 
     .training-instructions, .question-box, .section, .final-score {
       background: #ffffff;
@@ -35,7 +35,7 @@
       border-left: 4px solid #007acc;
       border-radius: 4px;
     }
-    select { font-size: 16px; margin-top: 10px; padding: 6px; border-radius:4px; }
+    select { font-size: 16px; margin-top: 10px; padding: 6px; border-radius: 4px; }
     .feedback {
       padding: 10px;
       margin-top: 10px;
@@ -79,6 +79,7 @@
   </style>
 </head>
 <body>
+
   <!-- 🔹 Informed Consent Section -->
   <div id="consentSection">
     <h1>NEIA Pilot Study - Informed Consent</h1>
@@ -112,27 +113,7 @@
   <!-- 🔹 Training Walkthrough (Hidden Until Consent) -->
   <div id="walkthroughSection" class="hidden">
     <div class="walkthrough-wrapper">
-      <section class="training-instructions walkthrough-instructions">
-        <h2>Training Instructions: Sample Walkthrough</h2>
-        <p>Welcome to your <strong>NEIA training!</strong> In this exercise, you’ll use our <em>interactive sample walkthrough</em> to practice evaluating NCLEX-style questions. This is <strong>not</strong> a quiz—your goal is to learn how to spot strengths and flaws in item construction, not simply to pick the correct answer.</p>
-        <h3>What You’ll Do</h3>
-        <ol>
-          <li><strong>View one sample question</strong> presented in the walkthrough.</li>
-          <li>
-            <strong>Rate five components</strong> of that question using the dropdowns  
-            <em>(this walkthrough covers <strong>5 of the 14</strong> total NEIA components):</em>
-            <ul>
-              <li>Stem Clarity</li>
-              <li>Correct Answer Accuracy</li>
-              <li>Distractor Plausibility</li>
-              <li>Terminology Accuracy</li>
-              <li>NCLEX-RN Test Plan Alignment</li>
-            </ul>
-          </li>
-          <li><strong>Read immediate feedback</strong> after each rating to see how closely your choice matches the expert’s rating and learn the rationale.</li>
-          <li><strong>Reveal the final “expert” score</strong> to confirm your overall judgment and compare notes.</li>
-        </ol>
-      </section>
+
       <aside class="question-pane">
         <div class="question-box">
           <h2>Sample NCLEX-Style Question</h2>
@@ -146,159 +127,184 @@
           <p><em>Answer: B. Hashimoto’s thyroiditis</em></p>
         </div>
       </aside>
-    </div>
 
-    <script>
-      const expert = {
-        clarity: '3',
-        accuracy: '3',
-        distractors: '3',
-        terminology: '1',
-        alignment: '1'
-      };
-      function showFeedback(id, val) {
-        const fb = document.getElementById('feedback-' + id);
-        fb.className = 'feedback ' + (val === expert[id] ? 'correct' : 'incorrect');
-        fb.style.display = 'block';
-      }
-      function revealFinal() {
-        document.getElementById('final').style.display = 'block';
-        document.getElementById('proceedBtn').classList.remove('hidden');
-        window.scrollTo(0,0);
-      }
-    </script>
+      <div class="walkthrough-instructions">
+        <section class="training-instructions">
+          <h2>Training Instructions: Sample Walkthrough</h2>
+          <p>Welcome to your <strong>NEIA training!</strong> In this exercise, you’ll use our <em>interactive sample walkthrough</em> to practice evaluating NCLEX-style questions. This is <strong>not</strong> a quiz—your goal is to learn how to spot strengths and flaws in item construction, not simply to pick the correct answer.</p>
+          <h3>What You’ll Do</h3>
+          <ol>
+            <li><strong>View one sample question</strong> presented in the walkthrough.</li>
+            <li>
+              <strong>Rate five components</strong> of that question using the dropdowns  
+              <em>(this walkthrough covers <strong>5 of the 14</strong> total NEIA components):</em>
+              <ul>
+                <li>Stem Clarity</li>
+                <li>Correct Answer Accuracy</li>
+                <li>Distractor Plausibility</li>
+                <li>Terminology Accuracy</li>
+                <li>NCLEX-RN Test Plan Alignment</li>
+              </ul>
+            </li>
+            <li><strong>Read immediate feedback</strong> after each rating to see how closely your choice matches the expert’s rating and learn the rationale.</li>
+            <li><strong>Reveal the final “expert” score</strong> to confirm your overall judgment and compare notes.</li>
+          </ol>
+        </section>
 
-    <!-- 1️⃣ Stem Clarity -->
-    <div class="section">
-      <h3>1️⃣ Stem Clarity</h3>
-      <div class="rating-desc">
-        <strong>Very Unclear:</strong> The stem is confusing, uses ambiguous, grammatically incorrect,<br>
-        or inaccurate language, or negative constructs such as 'All are correct except,' which can lead to misunderstandings.<br>
-        <strong>Somewhat Clear:</strong> The stem is generally understandable with minor ambiguities that could be improved for greater clarity and phrasing.<br>
-        <strong>Very Clear:</strong> The stem is concise and communicates the question effectively.
-      </div>
-      <select onchange="showFeedback('clarity', this.value)">
-        <option value="">-- Choose a rating --</option>
-        <option value="1">1 - Very Unclear</option>
-        <option value="2">2 - Somewhat Clear</option>
-        <option value="3">3 - Very Clear</option>
-      </select>
-      <div id="feedback-clarity" class="feedback">
-        <strong>Stem Clarity Feedback:</strong><br>
-        The expert rated this stem <strong>3 (Very Clear)</strong>. The stem is concise and communicates the question effectively.
-      </div>
-    </div>
+        <script>
+          const expert = {
+            clarity: '3',
+            accuracy: '3',
+            distractors: '3',
+            terminology: '1',
+            alignment: '1'
+          };
+          function showFeedback(id, val) {
+            const fb = document.getElementById('feedback-' + id);
+            fb.className = 'feedback ' + (val === expert[id] ? 'correct' : 'incorrect');
+            fb.style.display = 'block';
+          }
+          function revealFinal() {
+            document.getElementById('final').style.display = 'block';
+            document.getElementById('proceedBtn').classList.remove('hidden');
+            window.scrollTo(0,0);
+          }
+        </script>
 
-    <!-- 2️⃣ Correct Answer Accuracy -->
-    <div class="section">
-      <h3>2️⃣ Correct Answer Accuracy</h3>
-      <div class="rating-desc">
-        <strong>Incorrect:</strong> The provided answer fails to correctly address the question posed.<br>
-        <strong>Partially Correct:</strong> The answer is mostly correct, though a more accurate option could be possible.<br>
-        <strong>Fully Correct:</strong> The answer is correct and is the best choice among the options.
-      </div>
-      <select onchange="showFeedback('accuracy', this.value)">
-        <option value="">-- Choose a rating --</option>
-        <option value="1">1 - Incorrect</option>
-        <option value="2">2 - Partially Correct</option>
-        <option value="3">3 - Fully Correct</option>
-      </select>
-      <div id="feedback-accuracy" class="feedback">
-        <strong>Answer Accuracy Feedback:</strong><br>
-        The expert rated this answer <strong>3 (Fully Correct)</strong>.
-      </div>
-    </div>
-
-    <!-- 3️⃣ Distractor Plausibility -->
-    <div class="section">
-      <h3>3️⃣ Distractor Plausibility</h3>
-      <div class="rating-desc">
-        <strong>Not Plausible:</strong> Distractors are obviously incorrect or irrelevant.<br>
-        <strong>Somewhat Plausible:</strong> Distractors are somewhat plausible and present a moderate level of difficulty.<br>
-        <strong>Very Plausible:</strong> All distractors are plausible options and provide a high level of difficulty.
-      </div>
-      <select onchange="showFeedback('distractors', this.value)">
-        <option value="">-- Choose a rating --</option>
-        <option value="1">1 - Not Plausible</option>
-        <option value="2">2 - Somewhat Plausible</option>
-        <option value="3">3 - Very Plausible</option>
-      </select>
-      <div id="feedback-distractors" class="feedback">
-        <strong>Distractor Plausibility Feedback:</strong><br>
-        The expert rated these distractors <strong>3 (Very Plausible)</strong>. These are all endocrine disorders and potential diagnoses.
-      </div>
-    </div>
-
-    <!-- 4️⃣ Terminology -->
-    <div class="section">
-      <h3>4️⃣ Terminology</h3>
-      <div class="rating-desc">
-        <strong>Inaccurate:</strong> Uses incorrect or inconsistent terminology not aligned with the Test Plan.<br>
-        <strong>Accurate:</strong> Consistently uses accurate terminology aligned with the Test Plan.
-      </div>
-      <select onchange="showFeedback('terminology', this.value)">
-        <option value="">-- Choose a rating --</option>
-        <option value="1">1 - Inaccurate</option>
-        <option value="3">3 - Accurate</option>
-      </select>
-      <div id="feedback-terminology" class="feedback">
-        <strong>Terminology Feedback:</strong><br>
-        The expert rated this terminology <strong>1 (Inaccurate)</strong>.<br>
-        <em>Explanation:</em> The question uses “patient” and the abbreviation “TSH” which could confuse test-takers.
-        <div class="ref-box">
-          <strong>Terminology Reference</strong><br>
-          <table>
-            <tr><th>Correct Term</th><th>Definition</th></tr>
-            <tr><td>Client</td><td>Individual, family or group, which includes significant others and populations.</td></tr>
-            <tr><td>Order</td><td>Intervention, remedy or treatment as directed by an authorized primary health care provider.</td></tr>
-            <tr><td>Prescription</td><td>Intervention as it relates to medication specifically as directed by an authorized primary health care provider.</td></tr>
-            <tr><td>Primary Health Care Provider</td><td>Members of the health care team who are licensed and authorized to formulate prescriptions and orders on behalf of the client.</td></tr>
-            <tr><td>Unlicensed Assistive Personnel (UAP)</td><td>Any unlicensed personnel trained to function in a supportive role to whom a nursing responsibility may be delegated.</td></tr>
-          </table>
-          <p><strong>Incorrect Term → Correct Term → Reason</strong></p>
-          <table>
-            <tr><th>Incorrect</th><th>Correct</th><th>Reason for Avoidance</th></tr>
-            <tr><td>q.d.</td><td>Daily</td><td>Can be confused for "QID" or "every day"</td></tr>
-            <tr><td>U or u</td><td>Unit</td><td>Mistaken for zero or four, causing dosage errors</td></tr>
-            <tr><td>IU</td><td>International Unit</td><td>Mistaken for intravenous or the number 10</td></tr>
-            <tr><td>Q.O.D</td><td>Every other day</td><td>Mistaken for "QD" or "QID", which are very different dosing schedules</td></tr>
-            <tr><td>Trailing zero (X.0 mg)</td><td>X mg</td><td>Trailing zero can lead to overdose if decimal is missed</td></tr>
-            <tr><td>Lack of leading zero (.X mg)</td><td>0.X mg</td><td>Lack of leading zero can lead to overdose</td></tr>
-          </table>
-          <p><em>Disclaimer:</em> Abbreviations (like BP, HR, RR) may confuse test-takers.</p>
+        <!-- 1️⃣ Stem Clarity -->
+        <div class="section">
+          <h3>1️⃣ Stem Clarity</h3>
+          <div class="rating-desc">
+            <strong>Very Unclear:</strong> The stem is confusing, uses ambiguous, grammatically incorrect,<br>
+            or inaccurate language, or negative constructs such as 'All are correct except,' which can lead to misunderstandings.<br>
+            <strong>Somewhat Clear:</strong> The stem is generally understandable with minor ambiguities that could be improved for greater clarity and phrasing.<br>
+            <strong>Very Clear:</strong> The stem is concise and communicates the question effectively.
+          </div>
+          <select onchange="showFeedback('clarity', this.value)">
+            <option value="">-- Choose a rating --</option>
+            <option value="1">1 - Very Unclear</option>
+            <option value="2">2 - Somewhat Clear</option>
+            <option value="3">3 - Very Clear</option>
+          </select>
+          <div id="feedback-clarity" class="feedback">
+            <strong>Stem Clarity Feedback:</strong><br>
+            The expert rated this stem <strong>3 (Very Clear)</strong>. The stem is concise and communicates the question effectively.
+          </div>
         </div>
-      </div>
-    </div>
 
-    <!-- 5️⃣ NCLEX Test Plan Alignment -->
-    <div class="section">
-      <h3>5️⃣ NCLEX Test Plan Alignment</h3>
-      <div class="rating-desc">
-        <strong>Not Aligned:</strong> The question does not align with one or more NCLEX-RN Test Plan activity statements.<br>
-        <strong>Partially Aligned:</strong> The question has a superficial alignment with one or more NCLEX-RN Test Plan activity statements.<br>
-        <strong>Fully Aligned:</strong> The question is fully aligned with one or more NCLEX-RN Test Plan activity statements.
-      </div>
-      <p>See the official NCLEX-RN Test Plan <a href="https://www.nclex.com/files/2023_RN_Test%20Plan_English_FINAL.pdf" target="_blank">here</a>.</p>
-      <select onchange="showFeedback('alignment', this.value)">
-        <option value="">-- Choose a rating --</option>
-        <option value="1">1 - Not Aligned</option>
-        <option value="2">2 - Partially Aligned</option>
-        <option value="3">3 - Fully Aligned</option>
-      </select>
-      <div id="feedback-alignment" class="feedback">
-        <strong>NCLEX Alignment Feedback:</strong><br>
-        The expert rated this <strong>1 (Not Aligned)</strong> — it is purely diagnostic, not a nursing action or priority.
-      </div>
-    </div>
+        <!-- 2️⃣ Correct Answer Accuracy -->
+        <div class="section">
+          <h3>2️⃣ Correct Answer Accuracy</h3>
+          <div class="rating-desc">
+            <strong>Incorrect:</strong> The provided answer fails to correctly address the question posed.<br>
+            <strong>Partially Correct:</strong> The answer is mostly correct, though a more accurate option could be possible.<br>
+            <strong>Fully Correct:</strong> The answer is correct and is the best choice among the options.
+          </div>
+          <select onchange="showFeedback('accuracy', this.value)">
+            <option value="">-- Choose a rating --</option>
+            <option value="1">1 - Incorrect</option>
+            <option value="2">2 - Partially Correct</option>
+            <option value="3">3 - Fully Correct</option>
+          </select>
+          <div id="feedback-accuracy" class="feedback">
+            <strong>Answer Accuracy Feedback:</strong><br>
+            The expert rated this answer <strong>3 (Fully Correct)</strong>.
+          </div>
+        </div>
 
-    <!-- FINAL SCORE -->
-    <div class="final-score">
-      <button type="button" class="button" onclick="revealFinal()">🎯 Reveal Final Score</button>
-      <div id="final" class="feedback hidden">
-        <p><strong>Total Score: Low Quality</strong></p>
-        <p>This question is clinically accurate but scores poorly because it misuses terminology and does not align with nursing scope or the NCLEX-RN Test Plan.</p>
+        <!-- 3️⃣ Distractor Plausibility -->
+        <div class="section">
+          <h3>3️⃣ Distractor Plausibility</h3>
+          <div class="rating-desc">
+            <strong>Not Plausible:</strong> Distractors are obviously incorrect or irrelevant.<br>
+            <strong>Somewhat Plausible:</strong> Distractors are somewhat plausible and present a moderate level of difficulty.<br>
+            <strong>Very Plausible:</strong> All distractors are plausible options and provide a high level of difficulty.
+          </div>
+          <select onchange="showFeedback('distractors', this.value)">
+            <option value="">-- Choose a rating --</option>
+            <option value="1">1 - Not Plausible</option>
+            <option value="2">2 - Somewhat Plausible</option>
+            <option value="3">3 - Very Plausible</option>
+          </select>
+          <div id="feedback-distractors" class="feedback">
+            <strong>Distractor Plausibility Feedback:</strong><br>
+            The expert rated these distractors <strong>3 (Very Plausible)</strong>. These are all endocrine disorders and potential diagnoses.
+          </div>
+        </div>
+
+        <!-- 4️⃣ Terminology -->
+        <div class="section">
+          <h3>4️⃣ Terminology</h3>
+          <div class="rating-desc">
+            <strong>Inaccurate:</strong> Uses incorrect or inconsistent terminology not aligned with the Test Plan.<br>
+            <strong>Accurate:</strong> Consistently uses accurate terminology aligned with the Test Plan.
+          </div>
+          <select onchange="showFeedback('terminology', this.value)">
+            <option value="">-- Choose a rating --</option>
+            <option value="1">1 - Inaccurate</option>
+            <option value="3">3 - Accurate</option>
+          </select>
+          <div id="feedback-terminology" class="feedback">
+            <strong>Terminology Feedback:</strong><br>
+            The expert rated this terminology <strong>1 (Inaccurate)</strong>.<br>
+            <em>Explanation:</em> The question uses “patient” and the abbreviation “TSH” which could confuse test-takers.
+            <div class="ref-box">
+              <strong>Terminology Reference</strong><br>
+              <table>
+                <tr><th>Correct Term</th><th>Definition</th></tr>
+                <tr><td>Client</td><td>Individual, family or group, which includes significant others and populations.</td></tr>
+                <tr><td>Order</td><td>Intervention, remedy or treatment as directed by an authorized primary health care provider.</td></tr>
+                <tr><td>Prescription</td><td>Intervention as it relates to medication specifically as directed by an authorized primary health care provider.</td></tr>
+                <tr><td>Primary Health Care Provider</td><td>Members of the health care team who are licensed and authorized to formulate prescriptions and orders on behalf of the client.</td></tr>
+                <tr><td>Unlicensed Assistive Personnel (UAP)</td><td>Any unlicensed personnel trained to function in a supportive role to whom a nursing responsibility may be delegated.</td></tr>
+              </table>
+              <p><strong>Incorrect Term → Correct Term → Reason</strong></p>
+              <table>
+                <tr><th>Incorrect</th><th>Correct</th><th>Reason for Avoidance</th></tr>
+                <tr><td>q.d.</td><td>Daily</td><td>Can be confused for "QID" or "every day"</td></tr>
+                <tr><td>U or u</td><td>Unit</td><td>Mistaken for zero or four, causing dosage errors</td></tr>
+                <tr><td>IU</td><td>International Unit</td><td>Mistaken for intravenous or the number 10</td></tr>
+                <tr><td>Q.O.D</td><td>Every other day</td><td>Mistaken for "QD" or "QID", which are very different dosing schedules</td></tr>
+                <tr><td>Trailing zero (X.0 mg)</td><td>X mg</td><td>Trailing zero can lead to overdose if decimal is missed</td></tr>
+                <tr><td>Lack of leading zero (.X mg)</td><td>0.X mg</td><td>Lack of leading zero can lead to overdose</td></tr>
+              </table>
+              <p><em>Disclaimer:</em> Abbreviations (like BP, HR, RR) may confuse test-takers.</p>
+            </div>
+          </div>
+        </div>
+
+        <!-- 5️⃣ NCLEX Test Plan Alignment -->
+        <div class="section">
+          <h3>5️⃣ NCLEX Test Plan Alignment</h3>
+          <div class="rating-desc">
+            <strong>Not Aligned:</strong> The question does not align with one or more NCLEX-RN Test Plan activity statements.<br>
+            <strong>Partially Aligned:</strong> The question has a superficial alignment with one or more NCLEX-RN Test Plan activity statements.<br>
+            <strong>Fully Aligned:</strong> The question is fully aligned with one or more NCLEX-RN Test Plan activity statements.
+          </div>
+          <p>See the official NCLEX-RN Test Plan <a href="https://www.nclex.com/files/2023_RN_Test%20Plan_English_FINAL.pdf" target="_blank">here</a>.</p>
+          <select onchange="showFeedback('alignment', this.value)">
+            <option value="">-- Choose a rating --</option>
+            <option value="1">1 - Not Aligned</option>
+            <option value="2">2 - Partially Aligned</option>
+            <option value="3">3 - Fully Aligned</option>
+          </select>
+          <div id="feedback-alignment" class="feedback">
+            <strong>NCLEX Alignment Feedback:</strong><br>
+            The expert rated this <strong>1 (Not Aligned)</strong> — it is purely diagnostic, not a nursing action or priority.
+          </div>
+        </div>
+
+        <!-- FINAL SCORE -->
+        <div class="final-score">
+          <button type="button" class="button" onclick="revealFinal()">🎯 Reveal Final Score</button>
+          <div id="final" class="feedback hidden">
+            <p><strong>Total Score: Low Quality</strong></p>
+            <p>This question is clinically accurate but scores poorly because it misuses terminology and does not align with nursing scope or the NCLEX-RN Test Plan.</p>
+          </div>
+          <button id="proceedBtn" type="button" class="button hidden" onclick="finishWalkthrough()">Proceed to Questions</button>
+        </div>
+
       </div>
-      <button id="proceedBtn" type="button" class="button hidden" onclick="finishWalkthrough()">Proceed to Questions</button>
     </div>
   </div>
 
@@ -348,9 +354,9 @@
       "https://www.cognitoforms.com/MGHIHP1/NEIAToolQuestion30"
     ];
     var numLinks = 5;
-    function shuffle(a){
+    function shuffle(a) {
       var i = a.length, j, t;
-      while(i){
+      while (i) {
         j = Math.floor(Math.random() * i--);
         t = a[i];
         a[i] = a[j];
@@ -376,34 +382,34 @@
       return completedForms.indexOf(l) === -1;
     });
 
-    if(hasConsented){
+    if (hasConsented) {
       document.getElementById("consentSection").style.display = "none";
       document.getElementById("walkthroughSection").classList.remove("hidden");
-      if(walkthroughDone){
+      if (walkthroughDone) {
         document.getElementById("walkthroughSection").style.display = "none";
         document.getElementById("surveySection").classList.remove("hidden");
         renderNextLink();
       }
     }
 
-    function startSurvey(){
-      localStorage.setItem("hasConsented","true");
-      document.getElementById("consentSection").style.display="none";
+    function startSurvey() {
+      localStorage.setItem("hasConsented", "true");
+      document.getElementById("consentSection").style.display = "none";
       document.getElementById("walkthroughSection").classList.remove("hidden");
       window.scrollTo(0,0);
     }
 
-    function finishWalkthrough(){
+    function finishWalkthrough() {
       localStorage.setItem("walkthroughDone","true");
-      document.getElementById("walkthroughSection").style.display="none";
+      document.getElementById("walkthroughSection").style.display = "none";
       document.getElementById("surveySection").classList.remove("hidden");
       renderNextLink();
       window.scrollTo(0,0);
     }
 
-    function renderNextLink(){
+    function renderNextLink() {
       var div = document.getElementById("links");
-      if(selectedLinks.length === 0){
+      if (selectedLinks.length === 0) {
         div.innerHTML = "<h2>Thank you! You have completed all assigned forms.</h2>";
         return;
       }
@@ -412,15 +418,15 @@
       a.href = next;
       a.target = "_self";
       a.innerText = "Click here to start your next question";
-      a.onclick = function(){
+      a.onclick = function() {
         completedForms.push(next);
         localStorage.setItem("completedForms", JSON.stringify(completedForms));
       };
       div.appendChild(a);
     }
 
-    function enableDevMode(){
-      if(confirm("Clear all data?")){
+    function enableDevMode() {
+      if (confirm("Clear all data?")) {
         localStorage.clear();
         location.reload();
       }
@@ -428,5 +434,6 @@
   </script>
 </body>
 </html>
+
 
 
