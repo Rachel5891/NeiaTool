@@ -57,6 +57,25 @@
     table { width: 100%; border-collapse: collapse; margin-top: 8px; font-size: 13px; }
     th, td { border: 1px solid #ccc; padding: 6px; }
     th { background: #eee; }
+
+    /* sticky pane styles */
+    .walkthrough-wrapper {
+      display: flex;
+      gap: 20px;
+    }
+    .walkthrough-instructions {
+      flex: 1;
+    }
+    .question-pane {
+      position: sticky;
+      top: 20px;
+      align-self: flex-start;
+      max-width: 300px;
+    }
+    @media (max-width: 800px) {
+      .walkthrough-wrapper { flex-direction: column; }
+      .question-pane { position: static; max-width: none; }
+    }
   </style>
 </head>
 <body>
@@ -84,7 +103,7 @@
       <p>If you would like to speak to someone not involved in this research about your rights as a research subject, or any concerns or complaints you may have about the research, contact the Mass General Brigham IRB at (857) 282-1900.</p>
 
       <h2>Agreement to Participate</h2>
-      <p><strong>By clicking "Submit," you agree to participate in this study. You will receive 6 randomly assigned NCLEX questions. If you do not complete all 6 in one sitting, you can return using the same link as long as you do not clear your cache.</strong></p>
+      <p><strong>By clicking "Submit," you agree to participate in this study. You will receive 5 randomly assigned NCLEX questions. If you do not complete all 5 in one sitting, you can return using the same link as long as you do not clear your cache.</strong></p>
 
       <button type="button" class="button" onclick="startSurvey()">Submit</button>
     </div>
@@ -92,38 +111,41 @@
 
   <!-- 🔹 Training Walkthrough (Hidden Until Consent) -->
   <div id="walkthroughSection" class="hidden">
-    <section class="training-instructions">
-      <h2>NEIA Training Instructions: Sample Walkthrough</h2>
-      <p>Welcome to your <strong>NEIA training!</strong> In this exercise, you’ll use our <em>interactive sample walkthrough</em> to practice evaluating NCLEX-style questions. This is <strong>not</strong> a quiz—your goal is to learn how to spot strengths and flaws in item construction, not simply to pick the correct answer.</p>
-      <h3>What You’ll Do</h3>
-      <ol>
-        <li><strong>View one sample question</strong> presented in the walkthrough.</li>
-        <li>
-          <strong>Rate five components</strong> of that question using the dropdowns  
-          <em>(this walkthrough covers <strong>5 of the 14</strong> total NEIA components):</em>
+    <div class="walkthrough-wrapper">
+      <section class="training-instructions walkthrough-instructions">
+        <h2>Training Instructions: Sample Walkthrough</h2>
+        <p>Welcome to your <strong>NEIA training!</strong> In this exercise, you’ll use our <em>interactive sample walkthrough</em> to practice evaluating NCLEX-style questions. This is <strong>not</strong> a quiz—your goal is to learn how to spot strengths and flaws in item construction, not simply to pick the correct answer.</p>
+        <h3>What You’ll Do</h3>
+        <ol>
+          <li><strong>View one sample question</strong> presented in the walkthrough.</li>
+          <li>
+            <strong>Rate five components</strong> of that question using the dropdowns  
+            <em>(this walkthrough covers <strong>5 of the 14</strong> total NEIA components):</em>
+            <ul>
+              <li>Stem Clarity</li>
+              <li>Correct Answer Accuracy</li>
+              <li>Distractor Plausibility</li>
+              <li>Terminology Accuracy</li>
+              <li>NCLEX-RN Test Plan Alignment</li>
+            </ul>
+          </li>
+          <li><strong>Read immediate feedback</strong> after each rating to see how closely your choice matches the expert’s rating and learn the rationale.</li>
+          <li><strong>Reveal the final “expert” score</strong> to confirm your overall judgment and compare notes.</li>
+        </ol>
+      </section>
+      <aside class="question-pane">
+        <div class="question-box">
+          <h2>Sample NCLEX-Style Question</h2>
+          <p><strong>Stem:</strong> A 54-year-old patient presents to the clinic with fatigue, weight gain, dry skin, and cold intolerance. Laboratory results show an elevated TSH level and low free T4. Based on these findings, which condition is the most likely diagnosis?</p>
           <ul>
-            <li>Stem Clarity</li>
-            <li>Correct Answer Accuracy</li>
-            <li>Distractor Plausibility</li>
-            <li>Terminology Accuracy</li>
-            <li>NCLEX-RN Test Plan Alignment</li>
+            <li>A. Grave’s disease</li>
+            <li>B. Hashimoto’s thyroiditis</li>
+            <li>C. Subclinical hypothyroidism</li>
+            <li>D. Cushing’s syndrome</li>
           </ul>
-        </li>
-        <li><strong>Read immediate feedback</strong> after each rating to see how closely your choice matches the expert’s rating and learn the rationale.</li>
-        <li><strong>Reveal the final “expert” score</strong> to confirm your overall judgment and compare notes.</li>
-      </ol>
-    </section>
-
-    <div class="question-box">
-      <h2>Sample NCLEX-Style Question</h2>
-      <p><strong>Stem:</strong> A 54-year-old patient presents to the clinic with fatigue, weight gain, dry skin, and cold intolerance. Laboratory results show an elevated TSH level and low free T4. Based on these findings, which condition is the most likely diagnosis?</p>
-      <ul>
-        <li>A. Grave’s disease</li>
-        <li>B. Hashimoto’s thyroiditis</li>
-        <li>C. Subclinical hypothyroidism</li>
-        <li>D. Cushing’s syndrome</li>
-      </ul>
-      <p><em>Answer: B. Hashimoto’s thyroiditis</em></p>
+          <p><em>Answer: B. Hashimoto’s thyroiditis</em></p>
+        </div>
+      </aside>
     </div>
 
     <script>
@@ -243,7 +265,7 @@
             <tr><td>Trailing zero (X.0 mg)</td><td>X mg</td><td>Trailing zero can lead to overdose if decimal is missed</td></tr>
             <tr><td>Lack of leading zero (.X mg)</td><td>0.X mg</td><td>Lack of leading zero can lead to overdose</td></tr>
           </table>
-          <p><em>Disclaimer:</em> Abbreviations (including BP, HR, RR, etc) may confuse test-takers.</p>
+          <p><em>Disclaimer:</em> Abbreviations (like BP, HR, RR) may confuse test-takers.</p>
         </div>
       </div>
     </div>
@@ -271,7 +293,7 @@
 
     <!-- FINAL SCORE -->
     <div class="final-score">
-      <button class="button" onclick="revealFinal()">🎯 Reveal Final Score</button>
+      <button type="button" class="button" onclick="revealFinal()">🎯 Reveal Final Score</button>
       <div id="final" class="feedback hidden">
         <p><strong>Total Score: Low Quality</strong></p>
         <p>This question is clinically accurate but scores poorly because it misuses terminology and does not align with nursing scope or the NCLEX-RN Test Plan.</p>
@@ -289,7 +311,7 @@
 
   <!-- 🔹 Developer Mode Button -->
   <div class="dev-mode">
-    <button class="button dev-button" onclick="enableDevMode()">Developer Mode: Reset</button>
+    <button type="button" class="button dev-button" onclick="enableDevMode()">Developer Mode: Reset</button>
   </div>
 
   <script>
@@ -327,7 +349,7 @@
     ];
     var numLinks = 5;
     function shuffle(a){
-      let i = a.length, j, t;
+      var i = a.length, j, t;
       while(i){
         j = Math.floor(Math.random() * i--);
         t = a[i];
@@ -366,14 +388,14 @@
 
     function startSurvey(){
       localStorage.setItem("hasConsented","true");
-      document.getElementById("consentSection").style.display = "none";
+      document.getElementById("consentSection").style.display="none";
       document.getElementById("walkthroughSection").classList.remove("hidden");
       window.scrollTo(0,0);
     }
 
     function finishWalkthrough(){
       localStorage.setItem("walkthroughDone","true");
-      document.getElementById("walkthroughSection").style.display = "none";
+      document.getElementById("walkthroughSection").style.display="none";
       document.getElementById("surveySection").classList.remove("hidden");
       renderNextLink();
       window.scrollTo(0,0);
@@ -406,3 +428,5 @@
   </script>
 </body>
 </html>
+
+
