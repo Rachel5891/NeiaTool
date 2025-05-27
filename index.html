@@ -35,7 +35,6 @@
       border-left: 4px solid #007acc;
       border-radius: 4px;
     }
-    select { font-size: 16px; margin-top: 10px; padding: 6px; border-radius: 4px; }
     .feedback {
       padding: 10px;
       margin-top: 10px;
@@ -104,7 +103,7 @@
       <p>If you would like to speak to someone not involved in this research about your rights as a research subject, or any concerns or complaints you may have about the research, contact the Mass General Brigham IRB at (857) 282-1900.</p>
 
       <h2>Agreement to Participate</h2>
-      <p><strong>By clicking "Submit," you agree to participate in this study. You will receive 5 randomly assigned NCLEX questions. If you do not complete all 5 in one sitting, you can return using the same link as long as you do not clear your cache.</strong></p>
+      <p><strong>By clicking "Submit," you agree to participate in this study. You will first complete a brief demographic questionnaire, followed by a short training walkthrough, and then evaluate 5 randomly assigned NCLEX-style questions. If you do not complete all 5 in one sitting, you can return using the same link as long as you do not clear your cache.</strong></p>
 
       <button type="button" class="button" onclick="startSurvey()">Submit</button>
     </div>
@@ -117,7 +116,7 @@
       <aside class="question-pane">
         <div class="question-box">
           <h2>Sample NCLEX-Style Question</h2>
-          <p><strong>Stem:</strong> A 54-year-old patient presents to the clinic with fatigue, weight gain, dry skin, and cold intolerance. Laboratory results show an elevated TSH level and low free T4. Based on these findings, which condition is the most likely diagnosis?</p>
+          <p><strong>Stem:</strong> A 54-year-old client presents to the clinic with fatigue, weight gain, dry skin, and cold intolerance. Laboratory results show an elevated TSH level and low free T4. Based on these findings, which condition is the most likely diagnosis?</p>
           <ul>
             <li>A. Grave’s disease</li>
             <li>B. Hashimoto’s thyroiditis</li>
@@ -136,8 +135,7 @@
           <ol>
             <li><strong>View one sample question</strong> presented in the walkthrough.</li>
             <li>
-              <strong>Rate five components</strong> of that question using the dropdowns  
-              <em>(this walkthrough covers <strong>5 of the 14</strong> total NEIA components):</em>
+              <strong>Rate five components</strong> of that question using the <em>radio buttons</em>
               <ul>
                 <li>Stem Clarity</li>
                 <li>Correct Answer Accuracy</li>
@@ -180,12 +178,11 @@
             <strong>Somewhat Clear:</strong> The stem is generally understandable with minor ambiguities that could be improved for greater clarity and phrasing.<br>
             <strong>Very Clear:</strong> The stem is concise and communicates the question effectively.
           </div>
-          <select onchange="showFeedback('clarity', this.value)">
-            <option value="">-- Choose a rating --</option>
-            <option value="1">1 - Very Unclear</option>
-            <option value="2">2 - Somewhat Clear</option>
-            <option value="3">3 - Very Clear</option>
-          </select>
+          <div>
+            <label><input type="radio" name="clarity" value="1" onclick="showFeedback('clarity', this.value)"> 1 - Very Unclear</label><br>
+            <label><input type="radio" name="clarity" value="2" onclick="showFeedback('clarity', this.value)"> 2 - Somewhat Clear</label><br>
+            <label><input type="radio" name="clarity" value="3" onclick="showFeedback('clarity', this.value)"> 3 - Very Clear</label>
+          </div>
           <div id="feedback-clarity" class="feedback">
             <strong>Stem Clarity Feedback:</strong><br>
             The expert rated this stem <strong>3 (Very Clear)</strong>. The stem is concise and communicates the question effectively.
@@ -200,12 +197,11 @@
             <strong>Partially Correct:</strong> The answer is mostly correct, though a more accurate option could be possible.<br>
             <strong>Fully Correct:</strong> The answer is correct and is the best choice among the options.
           </div>
-          <select onchange="showFeedback('accuracy', this.value)">
-            <option value="">-- Choose a rating --</option>
-            <option value="1">1 - Incorrect</option>
-            <option value="2">2 - Partially Correct</option>
-            <option value="3">3 - Fully Correct</option>
-          </select>
+          <div>
+            <label><input type="radio" name="accuracy" value="1" onclick="showFeedback('accuracy', this.value)"> 1 - Incorrect</label><br>
+            <label><input type="radio" name="accuracy" value="2" onclick="showFeedback('accuracy', this.value)"> 2 - Partially Correct</label><br>
+            <label><input type="radio" name="accuracy" value="3" onclick="showFeedback('accuracy', this.value)"> 3 - Fully Correct</label>
+          </div>
           <div id="feedback-accuracy" class="feedback">
             <strong>Answer Accuracy Feedback:</strong><br>
             The expert rated this answer <strong>3 (Fully Correct)</strong>.
@@ -220,12 +216,11 @@
             <strong>Somewhat Plausible:</strong> Distractors are somewhat plausible and present a moderate level of difficulty.<br>
             <strong>Very Plausible:</strong> All distractors are plausible options and provide a high level of difficulty.
           </div>
-          <select onchange="showFeedback('distractors', this.value)">
-            <option value="">-- Choose a rating --</option>
-            <option value="1">1 - Not Plausible</option>
-            <option value="2">2 - Somewhat Plausible</option>
-            <option value="3">3 - Very Plausible</option>
-          </select>
+          <div>
+            <label><input type="radio" name="distractors" value="1" onclick="showFeedback('distractors', this.value)"> 1 - Not Plausible</label><br>
+            <label><input type="radio" name="distractors" value="2" onclick="showFeedback('distractors', this.value)"> 2 - Somewhat Plausible</label><br>
+            <label><input type="radio" name="distractors" value="3" onclick="showFeedback('distractors', this.value)"> 3 - Very Plausible</label>
+          </div>
           <div id="feedback-distractors" class="feedback">
             <strong>Distractor Plausibility Feedback:</strong><br>
             The expert rated these distractors <strong>3 (Very Plausible)</strong>. These are all endocrine disorders and potential diagnoses.
@@ -239,15 +234,14 @@
             <strong>Inaccurate:</strong> Uses incorrect or inconsistent terminology not aligned with the Test Plan.<br>
             <strong>Accurate:</strong> Consistently uses accurate terminology aligned with the Test Plan.
           </div>
-          <select onchange="showFeedback('terminology', this.value)">
-            <option value="">-- Choose a rating --</option>
-            <option value="1">1 - Inaccurate</option>
-            <option value="3">3 - Accurate</option>
-          </select>
+          <div>
+            <label><input type="radio" name="terminology" value="1" onclick="showFeedback('terminology', this.value)"> 1 - Inaccurate</label><br>
+            <label><input type="radio" name="terminology" value="3" onclick="showFeedback('terminology', this.value)"> 3 - Accurate</label>
+          </div>
           <div id="feedback-terminology" class="feedback">
             <strong>Terminology Feedback:</strong><br>
             The expert rated this terminology <strong>1 (Inaccurate)</strong>.<br>
-            <em>Explanation:</em> The question uses “patient” and the abbreviation “TSH” which could confuse test-takers.
+            <em>Explanation:</em> The question uses “client” interchangeably with “patient” and includes the abbreviation “TSH,” which could confuse test-takers.
             <div class="ref-box">
               <strong>Terminology Reference</strong><br>
               <table>
@@ -261,7 +255,7 @@
               <p><strong>Incorrect Term → Correct Term → Reason</strong></p>
               <table>
                 <tr><th>Incorrect</th><th>Correct</th><th>Reason for Avoidance</th></tr>
-                <tr><td>q.d.</td><td>Daily</td><td>Can be confused for "QID" or "every day"</td></tr>
+                <tr><td>q.d.</td><td>Daily</td><td>Can be confused with "QID" or "every day"</td></tr>
                 <tr><td>U or u</td><td>Unit</td><td>Mistaken for zero or four, causing dosage errors</td></tr>
                 <tr><td>IU</td><td>International Unit</td><td>Mistaken for intravenous or the number 10</td></tr>
                 <tr><td>Q.O.D</td><td>Every other day</td><td>Mistaken for "QD" or "QID", which are very different dosing schedules</td></tr>
@@ -282,12 +276,11 @@
             <strong>Fully Aligned:</strong> The question is fully aligned with one or more NCLEX-RN Test Plan activity statements.
           </div>
           <p>See the official NCLEX-RN Test Plan <a href="https://www.nclex.com/files/2023_RN_Test%20Plan_English_FINAL.pdf" target="_blank">here</a>.</p>
-          <select onchange="showFeedback('alignment', this.value)">
-            <option value="">-- Choose a rating --</option>
-            <option value="1">1 - Not Aligned</option>
-            <option value="2">2 - Partially Aligned</option>
-            <option value="3">3 - Fully Aligned</option>
-          </select>
+          <div>
+            <label><input type="radio" name="alignment" value="1" onclick="showFeedback('alignment', this.value)"> 1 - Not Aligned</label><br>
+            <label><input type="radio" name="alignment" value="2" onclick="showFeedback('alignment', this.value)"> 2 - Partially Aligned</label><br>
+            <label><input type="radio" name="alignment" value="3" onclick="showFeedback('alignment', this.value)"> 3 - Fully Aligned</label>
+          </div>
           <div id="feedback-alignment" class="feedback">
             <strong>NCLEX Alignment Feedback:</strong><br>
             The expert rated this <strong>1 (Not Aligned)</strong> — it is purely diagnostic, not a nursing action or priority.
@@ -394,6 +387,9 @@
 
     function startSurvey() {
       localStorage.setItem("hasConsented", "true");
+      // open demographics form in new tab
+      window.open("https://www.cognitoforms.com/MGHIHP1/NEIAToolIntro", "_blank");
+      // show training walkthrough while demographics are being completed
       document.getElementById("consentSection").style.display = "none";
       document.getElementById("walkthroughSection").classList.remove("hidden");
       window.scrollTo(0,0);
