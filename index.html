@@ -106,11 +106,11 @@
       shuffle(group1);
       shuffle(group2);
       shuffle(group3);
-      selectedLinks = [
+      selectedLinks = shuffle([
         ...group1.slice(0, 2),
         ...group2.slice(0, 2),
         ...group3.slice(0, 2),
-      ];
+      ]);
       localStorage.setItem("savedLinks", JSON.stringify(selectedLinks));
     }
 
