@@ -15,7 +15,7 @@
 </head>
 <body>
 
-   <!-- 🔹 Informed Consent Section -->
+  <!-- 🔹 Informed Consent Section -->
   <div id="consentSection">
     <h1>NEIA Pilot Study - Informed Consent</h1>
     <div class="consent-box">
@@ -59,64 +59,6 @@
 
   <script>
     function shuffle(array) {
-  let currentIndex = array.length, randomIndex;
-  while (currentIndex !== 0) {
-    randomIndex = Math.floor(Math.random() * currentIndex);
-    currentIndex--;
-    [array[currentIndex], array[randomIndex]] = [array[randomIndex], array[currentIndex]];
-  }
-  return array;
-}
-
-// Group 1: Questions 1–5
-const group1 = [
-  "https://www.cognitoforms.com/MGHIHP1/NEIAToolQuestion1",
-  "https://www.cognitoforms.com/MGHIHP1/NEIAToolQuestion22",
-  "https://www.cognitoforms.com/MGHIHP1/NEIAToolQuestion32",
-  "https://www.cognitoforms.com/MGHIHP1/NEIAToolQuestion42",
-  "https://www.cognitoforms.com/MGHIHP1/NEIAToolQuestion52",
-];
-
-// Group 2: Questions 6–10
-const group2 = [
-  "https://www.cognitoforms.com/MGHIHP1/NEIAToolQuestion62",
-  "https://www.cognitoforms.com/MGHIHP1/NEIAToolQuestion72",
-  "https://www.cognitoforms.com/MGHIHP1/NEIAToolQuestion82",
-  "https://www.cognitoforms.com/MGHIHP1/NEIAToolQuestion92",
-  "https://www.cognitoforms.com/MGHIHP1/NEIAToolQuestion102",
-];
-
-// Group 3: Questions 11–15
-const group3 = [
-  "https://www.cognitoforms.com/MGHIHP1/NEIAToolQuestion112",
-  "https://www.cognitoforms.com/MGHIHP1/NEIAToolQuestion122",
-  "https://www.cognitoforms.com/MGHIHP1/NEIAToolQuestion132",
-  "https://www.cognitoforms.com/MGHIHP1/NEIAToolQuestion142",
-  "https://www.cognitoforms.com/MGHIHP1/NEIAToolQuestion152",
-];
-
-const completedForms = JSON.parse(localStorage.getItem("completedForms")) || [];
-
-let selectedLinks;
-
-if (localStorage.getItem("savedLinks")) {
-  selectedLinks = JSON.parse(localStorage.getItem("savedLinks"));
-} else {
-  shuffle(group1);
-  shuffle(group2);
-  shuffle(group3);
-
-  selectedLinks = [
-    ...group1.slice(0, 2),
-    ...group2.slice(0, 2),
-    ...group3.slice(0, 2),
-  ];
-
-  localStorage.setItem("savedLinks", JSON.stringify(selectedLinks));
-}
-
-selectedLinks = selectedLinks.filter(link => !completedForms.includes(link));
-
       let currentIndex = array.length, randomIndex;
       while (currentIndex !== 0) {
         randomIndex = Math.floor(Math.random() * currentIndex);
@@ -126,17 +68,51 @@ selectedLinks = selectedLinks.filter(link => !completedForms.includes(link));
       return array;
     }
 
-    var hasConsented = localStorage.getItem("hasConsented");
-    var completedForms = JSON.parse(localStorage.getItem("completedForms")) || [];
-    var stored = localStorage.getItem("savedLinks");
-    var selectedLinks = stored
-      ? JSON.parse(stored)
-      : (() => {
-          shuffle(formLinks);
-          const selected = formLinks.slice(0, numLinks);
-          localStorage.setItem("savedLinks", JSON.stringify(selected));
-          return selected;
-        })();
+    // Group 1: Questions 1–5
+    const group1 = [
+      "https://www.cognitoforms.com/MGHIHP1/NEIAToolQuestion1",
+      "https://www.cognitoforms.com/MGHIHP1/NEIAToolQuestion22",
+      "https://www.cognitoforms.com/MGHIHP1/NEIAToolQuestion32",
+      "https://www.cognitoforms.com/MGHIHP1/NEIAToolQuestion42",
+      "https://www.cognitoforms.com/MGHIHP1/NEIAToolQuestion52",
+    ];
+
+    // Group 2: Questions 6–10
+    const group2 = [
+      "https://www.cognitoforms.com/MGHIHP1/NEIAToolQuestion62",
+      "https://www.cognitoforms.com/MGHIHP1/NEIAToolQuestion72",
+      "https://www.cognitoforms.com/MGHIHP1/NEIAToolQuestion82",
+      "https://www.cognitoforms.com/MGHIHP1/NEIAToolQuestion92",
+      "https://www.cognitoforms.com/MGHIHP1/NEIAToolQuestion102",
+    ];
+
+    // Group 3: Questions 11–15
+    const group3 = [
+      "https://www.cognitoforms.com/MGHIHP1/NEIAToolQuestion112",
+      "https://www.cognitoforms.com/MGHIHP1/NEIAToolQuestion122",
+      "https://www.cognitoforms.com/MGHIHP1/NEIAToolQuestion132",
+      "https://www.cognitoforms.com/MGHIHP1/NEIAToolQuestion142",
+      "https://www.cognitoforms.com/MGHIHP1/NEIAToolQuestion152",
+    ];
+
+    const hasConsented = localStorage.getItem("hasConsented");
+    const completedForms = JSON.parse(localStorage.getItem("completedForms")) || [];
+
+    let selectedLinks;
+
+    if (localStorage.getItem("savedLinks")) {
+      selectedLinks = JSON.parse(localStorage.getItem("savedLinks"));
+    } else {
+      shuffle(group1);
+      shuffle(group2);
+      shuffle(group3);
+      selectedLinks = [
+        ...group1.slice(0, 2),
+        ...group2.slice(0, 2),
+        ...group3.slice(0, 2),
+      ];
+      localStorage.setItem("savedLinks", JSON.stringify(selectedLinks));
+    }
 
     selectedLinks = selectedLinks.filter(link => !completedForms.includes(link));
 
@@ -157,6 +133,7 @@ selectedLinks = selectedLinks.filter(link => !completedForms.includes(link));
 
     function renderNextLink() {
       const div = document.getElementById("links");
+      div.innerHTML = "";
       if (selectedLinks.length === 0) {
         div.innerHTML = "<h2>Thank you! You have completed all assigned forms.</h2>";
         return;
@@ -182,6 +159,3 @@ selectedLinks = selectedLinks.filter(link => !completedForms.includes(link));
   </script>
 </body>
 </html>
-
-
-
